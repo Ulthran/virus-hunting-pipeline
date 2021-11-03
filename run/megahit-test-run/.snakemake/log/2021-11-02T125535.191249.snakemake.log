@@ -1,0 +1,59 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 14
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	adapter_removal_paired
+	1	all_qc
+	1	fastqc
+	1	find_low_complexity
+	2	qc_final
+	2	remove_low_complexity
+	2	sample_intake
+	1	trimmomatic_paired
+	11
+
+[Tue Nov  2 12:55:35 2021]
+rule sample_intake:
+    input: /data/virus_scanning/raw/SRR1557959/SRR1557959_1.fastq.gz
+    output: /data/virus_scanning/raw/SRR1557959/sunbeam/qc/00_samples/SRR1557959_1.fastq.gz
+    jobid: 9
+    wildcards: sample=SRR1557959, rp=1
+
+[Tue Nov  2 12:55:35 2021]
+rule sample_intake:
+    input: /data/virus_scanning/raw/SRR1557959/SRR1557959_2.fastq.gz
+    output: /data/virus_scanning/raw/SRR1557959/sunbeam/qc/00_samples/SRR1557959_2.fastq.gz
+    jobid: 10
+    wildcards: sample=SRR1557959, rp=2
+
+[Tue Nov  2 12:55:36 2021]
+Finished job 9.
+1 of 11 steps (9%) done
+[Tue Nov  2 12:55:36 2021]
+Finished job 10.
+2 of 11 steps (18%) done
+
+[Tue Nov  2 12:55:36 2021]
+rule adapter_removal_paired:
+    input: /data/virus_scanning/raw/SRR1557959/sunbeam/qc/00_samples/SRR1557959_1.fastq.gz, /data/virus_scanning/raw/SRR1557959/sunbeam/qc/00_samples/SRR1557959_2.fastq.gz
+    output: /data/virus_scanning/raw/SRR1557959/sunbeam/qc/01_cutadapt/SRR1557959_1.fastq.gz, /data/virus_scanning/raw/SRR1557959/sunbeam/qc/01_cutadapt/SRR1557959_2.fastq.gz
+    log: /data/virus_scanning/raw/SRR1557959/sunbeam/qc/log/cutadapt/SRR1557959.log
+    jobid: 8
+    wildcards: sample=SRR1557959
+    threads: 4
+
+[Tue Nov  2 12:55:37 2021]
+Finished job 8.
+3 of 11 steps (27%) done
+
+[Tue Nov  2 12:55:37 2021]
+rule trimmomatic_paired:
+    input: /data/virus_scanning/raw/SRR1557959/sunbeam/qc/01_cutadapt/SRR1557959_1.fastq.gz, /data/virus_scanning/raw/SRR1557959/sunbeam/qc/01_cutadapt/SRR1557959_2.fastq.gz
+    output: /data/virus_scanning/raw/SRR1557959/sunbeam/qc/02_trimmomatic/SRR1557959_1.fastq.gz, /data/virus_scanning/raw/SRR1557959/sunbeam/qc/02_trimmomatic/SRR1557959_2.fastq.gz, /data/virus_scanning/raw/SRR1557959/sunbeam/qc/02_trimmomatic/unpaired/SRR1557959_1_unpaired.fastq.gz, /data/virus_scanning/raw/SRR1557959/sunbeam/qc/02_trimmomatic/unpaired/SRR1557959_2_unpaired.fastq.gz
+    log: /data/virus_scanning/raw/SRR1557959/sunbeam/qc/log/trimmomatic/SRR1557959.out
+    jobid: 6
+    wildcards: sample=SRR1557959
+    threads: 4
+

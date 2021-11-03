@@ -1,0 +1,13 @@
+virus_scanning/
+
+install/miniconda3/
+install/Cenote-Taker2/
+install/env/
+install/install_ct2.log
+install/pipeline_installation_files/mummer-4.0.0rc1.tar/
+install/pipeline_installation_files/sunbeam/
+install/program_files/
+install/sunbeam-stable/
+
+run/manual-test-run/.snakemake/
+run/manual-test-run/cenote_output/

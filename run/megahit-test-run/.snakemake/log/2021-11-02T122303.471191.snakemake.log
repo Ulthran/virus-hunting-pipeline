@@ -1,0 +1,140 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 6
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	adapter_removal_paired
+	1	all_qc
+	1	fastqc
+	1	find_low_complexity
+	2	qc_final
+	2	remove_low_complexity
+	2	sample_intake
+	1	trimmomatic_paired
+	11
+
+[Tue Nov  2 12:23:04 2021]
+rule sample_intake:
+    input: /data/virus_scanning/raw/SRR2318040/SRR2318040_2.fastq.gz
+    output: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/00_samples/SRR2318040_2.fastq.gz
+    jobid: 10
+    wildcards: sample=SRR2318040, rp=2
+
+[Tue Nov  2 12:23:04 2021]
+rule sample_intake:
+    input: /data/virus_scanning/raw/SRR2318040/SRR2318040_1.fastq.gz
+    output: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/00_samples/SRR2318040_1.fastq.gz
+    jobid: 9
+    wildcards: sample=SRR2318040, rp=1
+
+[Tue Nov  2 12:23:05 2021]
+Finished job 9.
+1 of 11 steps (9%) done
+[Tue Nov  2 12:23:05 2021]
+Finished job 10.
+2 of 11 steps (18%) done
+
+[Tue Nov  2 12:23:05 2021]
+rule adapter_removal_paired:
+    input: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/00_samples/SRR2318040_1.fastq.gz, /data/virus_scanning/raw/SRR2318040/sunbeam/qc/00_samples/SRR2318040_2.fastq.gz
+    output: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/01_cutadapt/SRR2318040_1.fastq.gz, /data/virus_scanning/raw/SRR2318040/sunbeam/qc/01_cutadapt/SRR2318040_2.fastq.gz
+    log: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/log/cutadapt/SRR2318040.log
+    jobid: 8
+    wildcards: sample=SRR2318040
+    threads: 4
+
+[Tue Nov  2 12:23:06 2021]
+Finished job 8.
+3 of 11 steps (27%) done
+
+[Tue Nov  2 12:23:06 2021]
+rule trimmomatic_paired:
+    input: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/01_cutadapt/SRR2318040_1.fastq.gz, /data/virus_scanning/raw/SRR2318040/sunbeam/qc/01_cutadapt/SRR2318040_2.fastq.gz
+    output: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/02_trimmomatic/SRR2318040_1.fastq.gz, /data/virus_scanning/raw/SRR2318040/sunbeam/qc/02_trimmomatic/SRR2318040_2.fastq.gz, /data/virus_scanning/raw/SRR2318040/sunbeam/qc/02_trimmomatic/unpaired/SRR2318040_1_unpaired.fastq.gz, /data/virus_scanning/raw/SRR2318040/sunbeam/qc/02_trimmomatic/unpaired/SRR2318040_2_unpaired.fastq.gz
+    log: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/log/trimmomatic/SRR2318040.out
+    jobid: 6
+    wildcards: sample=SRR2318040
+    threads: 4
+
+Removing temporary output file /data/virus_scanning/raw/SRR2318040/sunbeam/qc/02_trimmomatic/unpaired/SRR2318040_1_unpaired.fastq.gz.
+Removing temporary output file /data/virus_scanning/raw/SRR2318040/sunbeam/qc/02_trimmomatic/unpaired/SRR2318040_2_unpaired.fastq.gz.
+[Tue Nov  2 12:30:16 2021]
+Finished job 6.
+4 of 11 steps (36%) done
+
+[Tue Nov  2 12:30:16 2021]
+rule find_low_complexity:
+    input: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/02_trimmomatic/SRR2318040_1.fastq.gz, /data/virus_scanning/raw/SRR2318040/sunbeam/qc/02_trimmomatic/SRR2318040_2.fastq.gz
+    output: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/log/komplexity/SRR2318040.filtered_ids
+    jobid: 7
+    wildcards: sample=SRR2318040
+
+
+[Tue Nov  2 12:30:16 2021]
+rule fastqc:
+    input: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/02_trimmomatic/SRR2318040_1.fastq.gz, /data/virus_scanning/raw/SRR2318040/sunbeam/qc/02_trimmomatic/SRR2318040_2.fastq.gz
+    output: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/reports/SRR2318040_1_fastqc/fastqc_data.txt, /data/virus_scanning/raw/SRR2318040/sunbeam/qc/reports/SRR2318040_2_fastqc/fastqc_data.txt
+    jobid: 3
+    wildcards: sample=SRR2318040
+
+[Tue Nov  2 12:32:58 2021]
+Finished job 3.
+5 of 11 steps (45%) done
+[Tue Nov  2 12:34:07 2021]
+Finished job 7.
+6 of 11 steps (55%) done
+
+[Tue Nov  2 12:34:07 2021]
+rule remove_low_complexity:
+    input: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/02_trimmomatic/SRR2318040_2.fastq.gz, /data/virus_scanning/raw/SRR2318040/sunbeam/qc/log/komplexity/SRR2318040.filtered_ids
+    output: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/03_komplexity/SRR2318040_2.fastq.gz
+    jobid: 5
+    wildcards: sample=SRR2318040, rp=2
+
+
+[Tue Nov  2 12:34:07 2021]
+rule remove_low_complexity:
+    input: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/02_trimmomatic/SRR2318040_1.fastq.gz, /data/virus_scanning/raw/SRR2318040/sunbeam/qc/log/komplexity/SRR2318040.filtered_ids
+    output: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/03_komplexity/SRR2318040_1.fastq.gz
+    jobid: 4
+    wildcards: sample=SRR2318040, rp=1
+
+[Tue Nov  2 12:37:05 2021]
+Finished job 5.
+7 of 11 steps (64%) done
+
+[Tue Nov  2 12:37:05 2021]
+rule qc_final:
+    input: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/03_komplexity/SRR2318040_2.fastq.gz
+    output: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/cleaned/SRR2318040_2.fastq.gz
+    jobid: 2
+    wildcards: sample=SRR2318040, rp=2
+
+[Tue Nov  2 12:37:05 2021]
+Finished job 2.
+8 of 11 steps (73%) done
+[Tue Nov  2 12:37:19 2021]
+Finished job 4.
+9 of 11 steps (82%) done
+
+[Tue Nov  2 12:37:19 2021]
+rule qc_final:
+    input: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/03_komplexity/SRR2318040_1.fastq.gz
+    output: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/cleaned/SRR2318040_1.fastq.gz
+    jobid: 1
+    wildcards: sample=SRR2318040, rp=1
+
+[Tue Nov  2 12:37:19 2021]
+Finished job 1.
+10 of 11 steps (91%) done
+
+[Tue Nov  2 12:37:19 2021]
+localrule all_qc:
+    input: /data/virus_scanning/raw/SRR2318040/sunbeam/qc/cleaned/SRR2318040_1.fastq.gz, /data/virus_scanning/raw/SRR2318040/sunbeam/qc/cleaned/SRR2318040_2.fastq.gz, /data/virus_scanning/raw/SRR2318040/sunbeam/qc/reports/SRR2318040_1_fastqc/fastqc_data.txt, /data/virus_scanning/raw/SRR2318040/sunbeam/qc/reports/SRR2318040_2_fastqc/fastqc_data.txt
+    jobid: 0
+
+[Tue Nov  2 12:37:19 2021]
+Finished job 0.
+11 of 11 steps (100%) done
+Complete log: /data/run/megahit-test-run/.snakemake/log/2021-11-02T122303.471191.snakemake.log
