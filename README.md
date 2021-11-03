@@ -7,7 +7,7 @@ NB: This is configured to run on AWS EC2 instances but should be translatable to
 # Pipeline specs
 
  - Fastq download -> sunbeam -> megahit -> cenote-taker2 -> cleanup & output
- - Bottlenecks:
+Bottlenecks:
  - BW                CPU        CPU, RAM   CPU, RAM, IOPS   N/A
 
 # Install process
@@ -18,10 +18,7 @@ As written, everything works best if the pipeline and it's dependencies are inst
 
 replacing *my_key_file.pem* with the key you created when you made the instance and *instance-id* with the instance's public IP. You can also find this command through the AWS Console, navigate to your instance then click **Connnect** and select the SSH option. Once you're into the instance, you need to find the EBS volume you mounted:
 
-```$ lsblk
-
-Output:
-NAME          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT                                                                       nvme1n1       259:0    0  200G  0 disk                                                                                  nvme0n1       259:1    0    8G  0 disk                                                                                  ├─nvme0n1p1   259:2    0    8G  0 part /                                                                                └─nvme0n1p128 259:3    0    1M  0 part ```
+```$ lsblk```
 
 Find the 200G disk and then:
 
