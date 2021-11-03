@@ -94,7 +94,7 @@ PATH=$PATH:/home/ec2-user/edirect/
 
 CONTIGS="$contig_dir"/final.contigs.fa
 
-python /data/install/Cenote-Taker2/run_cenote-taker2.py -c $CONTIGS -r $SRA  -p True -m 32 -t 8 >> out 2> err
+python /data/install/Cenote-Taker2/run_cenote-taker2.py -c $CONTIGS -r $SRA  -p True -m 32 -t 8 >> out_"$SRA".log 2> err_"$SRA".log
 
 conda deactivate
 
