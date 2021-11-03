@@ -6,11 +6,10 @@ NB: This is configured to run on AWS EC2 instances but should be translatable to
 
 # Pipeline specs
 
- - Fastq download -> sunbeam -> megahit -> cenote-taker2 -> cleanup & output
+### Fastq download -> sunbeam -> megahit -> cenote-taker2 -> cleanup & output
 
-Bottlenecks:
-
- - BW________________CPU_______CPU, RAM____CPU, RAM, IOPS___N/A
+ - Fastq download
+    - Stuff
 
 # Install process
 
