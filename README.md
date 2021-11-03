@@ -6,10 +6,18 @@ NB: This is configured to run on AWS EC2 instances but should be translatable to
 
 # Pipeline specs
 
-### Fastq download -> sunbeam -> megahit -> cenote-taker2 -> cleanup & output
+### fastq download -> sunbeam -> megahit -> cenote-taker2 -> cleanup & output
 
- - Fastq download
-    - Stuff
+ - fastq download
+    - Downloading sequencing data
+ - sunbeam
+    - 
+ - megahit
+    - 
+ - cenote-taker2
+    - 
+ - cleanup & output
+    - 
 
 # Install process
 
