@@ -7,8 +7,10 @@ NB: This is configured to run on AWS EC2 instances but should be translatable to
 # Pipeline specs
 
  - Fastq download -> sunbeam -> megahit -> cenote-taker2 -> cleanup & output
+
 Bottlenecks:
- - BW                CPU        CPU, RAM   CPU, RAM, IOPS   N/A
+
+ - BW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CPU        CPU, RAM   CPU, RAM, IOPS   N/A
 
 # Install process
 
@@ -24,4 +26,4 @@ Find the 200G disk and then:
 
 ```$ sudo mount /dev/nvme1n1 /data```
 
-replacing *nvme1n1* with the result from the previous command and making sure that */data* exists (`$ mkdir /data`) and you want to mount it there.
+replacing *nvme1n1* with the result from the previous command and making sure that */data* exists (`$ mkdir /data`).
