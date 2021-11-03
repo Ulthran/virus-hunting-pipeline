@@ -10,7 +10,7 @@ NB: This is configured to run on AWS EC2 instances but should be translatable to
 
 Bottlenecks:
 
- - BW_______________\_CPU________ CPU, RAM   CPU, RAM, IOPS   N/A
+ - BW________________CPU_______CPU, RAM____CPU, RAM, IOPS___N/A
 
 # Install process
 
