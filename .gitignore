@@ -1,3 +1,5 @@
+virus_hunting.pem   # Change this to whatever name you choose for your key file
+
 virus_scanning/
 
 install/miniconda3/
