@@ -5,12 +5,21 @@
 ## agreement and confirm installation location (should be in your home directory)
 ./Miniconda3-py38_4.10.3-Linux-x86_64.sh
 
+# Install sratools for downloading SRA sequences from S3 public DBs
+tar -vxzf pipeline_installation_files/sratoolkit.tar.gz
+export PATH=$PATH:/data/install/sratoolkit.2.11.3-ubuntu64/bin
+which fastq-dump # this step should output the path just added to PATH, if it errors the installation should be fixed
+
+vdb-config -i # this step requires interaction - follow instructions here
+              # https://github.com/ncbi/sra-tools/wiki/03.-Quick-Toolkit-Configuration
+	      # and set the "Location of user-repository" to /data/virus_scanning/raw/dump
+
 ## STEP 2: Install sunbeam conda environment
 conda env create -f pipeline_installation_files/sunbeam_conda.yml
 
 source ~/.bashrc
 
-# actvate env
+# activate env
 conda activate sunbeam
 
 ## STEP 3: Install sunbeam

@@ -1,3 +1,5 @@
+virus_hunting.pem   # Change this to whatever name you choose for your key file
+
 virus_scanning/
 
 install/miniconda3/
@@ -6,8 +8,14 @@ install/env/
 install/install_ct2.log
 install/pipeline_installation_files/mummer-4.0.0rc1.tar/
 install/pipeline_installation_files/sunbeam/
+install/pipeline_installation_files/sratoolkit.tar.gz   # This shouldn't be in here, need large file storage
 install/program_files/
+install/sratoolkit.2.11.3-ubuntu64/ 
 install/sunbeam-stable/
 
 run/manual-test-run/.snakemake/
 run/manual-test-run/cenote_output/
+
+**/*.sra
+**/*.fastq
+**/*.fastq.gz
