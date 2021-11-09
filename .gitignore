@@ -13,8 +13,10 @@ install/program_files/
 install/sratoolkit.2.11.3-ubuntu64/ 
 install/sunbeam-stable/
 
-run/manual-test-run/.snakemake/
-run/manual-test-run/cenote_output/
+run/.snakemake/
+run/cenote_output/
+run/*-test-run/
+run/logs/
 
 **/*.sra
 **/*.fastq

@@ -95,6 +95,11 @@ echo Contigs built
 ## ------------- Cenote-Taker2 for detecting viral contigs -------------------
 conda activate /data/install/Cenote-Taker2/cenote_taker/cenote-taker2_env/
 
+if [ -d "cenote_output" ] ; then
+	echo "cenote_output already exists"
+else
+	mkdir cenote_output
+fi
 cd cenote_output
 mkdir $SRA
 cd $SRA
@@ -111,7 +116,11 @@ PATH=$PATH:/home/ec2-user/edirect/
 
 CONTIGS="$contig_dir"/final.contigs.fa
 
-python /data/install/Cenote-Taker2/run_cenote-taker2.py -c $CONTIGS -r $SRA  -p True -m $MEM -t $THREADS >> out_"$SRA".log 2> err_"$SRA".log
+before=$(date +"%T")
+echo "Start cenote: $before"
+python /data/install/Cenote-Taker2/run_cenote-taker2.py -c $CONTIGS -r $SRA  -p True -m $MEM -t $THREADS >> /data/run/logs/out_"$SRA".log 2> /data/run/logs/err_"$SRA".log
+after=$(date +"%T")
+echo "End cenote: $after"
 
 conda deactivate
 
