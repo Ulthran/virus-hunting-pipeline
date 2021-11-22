@@ -9,7 +9,7 @@ root_dir="/efs/virus_hunting_pipeline"
 
 # Install sratools for downloading SRA sequences from S3 public DBs
 tar -vxzf pipeline_installation_files/sratoolkit.tar.gz
-export PATH=$PATH:/data/install/sratoolkit.2.11.3-ubuntu64/bin
+export PATH=$PATH:$root_dir/install/sratoolkit.2.11.3-ubuntu64/bin
 which fastq-dump # this step should output the path just added to PATH, if it errors the installation should be fixed
 
 vdb-config -i # this step requires interaction - follow instructions here

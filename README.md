@@ -2,9 +2,9 @@
 
 HPC pipeline for identifying viral contigs in existing sequence data
 
-NB: This is configured to run on AWS EC2 instances but should be translatable to other cloud platforms
+NB: This is configured to run on AWS but should be translatable to other cloud platforms
 
-# Pipeline specs
+# Pipeline overview
 
 ### fastq download -> sunbeam -> megahit -> cenote-taker2 -> cleanup & output
 
@@ -21,16 +21,28 @@ NB: This is configured to run on AWS EC2 instances but should be translatable to
 
 # Install process
 
-As written, everything works best if the pipeline and it's dependencies are installed onto an EBS volume and that volume is then mounted to the instance running the pipeline. Start by creating an EBS volume (gp3, ~200GiB, default IOPS & throughput of 3000 & 125) and attaching it to an EC2 instance (simplest to use something in the c5a class with Amazon Linux x86\_64 AMI). SSH into the instance with something like:
+## On an EBS volume (best for single runs of the pipeline)
 
-```$ sudo ssh -i *my_key_file.pem* ec2-user@ec2-*instance-id*.compute-1.amazonaws.com```
 
-replacing *my_key_file.pem* with the key you created when you made the instance and *instance-id* with the instance's public IP. You can also find this command through the AWS Console, navigate to your instance then click **Connnect** and select the SSH option. Once you're into the instance, you need to find the EBS volume you mounted:
 
-```$ lsblk```
+## On an EFS volume (best for many parallel runs)
 
-Find the 200G disk and then:
+Create an EC2 instance and an EFS volume then [mount the EFS volume](https://docs.aws.amazon.com/efs/latest/ug/wt1-test.html) to a location of your choosing. Once it is mounted, `cd` into the volume root and clone this repo (you will have to [create an SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) for GitHub access) and run the install script:
 
-```$ sudo mount /dev/nvme1n1 /data```
+```
+git clone git@github.com:Ulthran/virus-hunting-pipeline.git
+cd virus-hunting-pipeline/install
+source ./setup_pipeline.sh
+```
 
-replacing *nvme1n1* with the result from the previous command and making sure that */data* exists (`$ mkdir /data`).
+
+
+# Running the pipeline
+
+## Single jobs
+
+
+
+## Through Batch
+
+
