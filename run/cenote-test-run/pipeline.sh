@@ -96,7 +96,7 @@ PATH=$PATH:/home/ec2-user/edirect/
 CONTIGS="$contig_dir"/final.contigs.fa
 
 echo $(date +"%T")
-python /data/install/Cenote-Taker2/run_cenote-taker2.py -c $CONTIGS -r $SRA  -p True -m 28 -t 8
+python /data/install/Cenote-Taker2/run_cenote-taker2.py -c $CONTIGS -r $SRA  -p True -m 60 -t 30
 echo $(date +"%T")
 
 conda deactivate
