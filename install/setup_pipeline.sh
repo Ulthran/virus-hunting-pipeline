@@ -1,5 +1,7 @@
 #!/bin/bash
 
+root_dir="/efs/virus_hunting_pipeline"
+
 ## STEP 1: set up conda python manager 
 ## this step will require some interaction - you need to accept the miniconda 
 ## agreement and confirm installation location (should be in your home directory)
