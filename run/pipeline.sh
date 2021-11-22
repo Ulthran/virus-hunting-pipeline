@@ -14,7 +14,8 @@
 SRA=$1
 THREADS=$2
 MEM=$3
-WD="/data/virus_scanning"
+root_dir="/efs/virus_hunting_pipeline"
+WD="$root_dir/virus_scanning"
 
 echo Begin sample $SRA
 ##  ------------------ Download fastq using wget  -------------------------
@@ -43,7 +44,7 @@ mkdir $DIR
 #wget $wget_path -P $DIR
 
 ### Using NCBI public S3 bucket ###
-export PATH=$PATH:/data/install/sratoolkit.2.11.3-ubuntu64/bin
+export PATH=$PATH:$root_dir/install/sratoolkit.2.11.3-ubuntu64/bin
 source ~/.bashrc
 
 prefetch $SRA
@@ -51,7 +52,7 @@ cd "$WD"/raw/dump/sra/
 fasterq-dump $SRA --outdir $DIR
 cd $DIR
 gzip -1 "$SRA"_1.fastq && gzip -1 "$SRA"_2.fastq
-cd /data/run
+cd $root_dir/run
 
 echo Fastq downloaded
 
@@ -72,7 +73,7 @@ sed -i "s/OUTPUT_DIRECTORY/$sunbeam_dir/g" $config_file ## add the output direct
 echo Config file created
 
 ## ---------------- Run sunbeam for quality control ---------------------------
-source /data/install/miniconda3/etc/profile.d/conda.sh 
+source $root_dir/install/miniconda3/etc/profile.d/conda.sh 
 conda activate sunbeam
 
 sunbeam run --cores $THREADS --configfile $config_file all_qc
@@ -93,7 +94,7 @@ conda deactivate
 echo Contigs built
 
 ## ------------- Cenote-Taker2 for detecting viral contigs -------------------
-conda activate /data/install/Cenote-Taker2/cenote_taker/cenote-taker2_env/
+conda activate $root_dir/install/Cenote-Taker2/cenote_taker/cenote-taker2_env/
 
 if [ -d "cenote_output" ] ; then
 	echo "cenote_output already exists"
@@ -106,19 +107,19 @@ cd $SRA
 cenote_output=`pwd`
 
 ## some required programs are loaded in the conda environemnt, others need to be added to the path
-PATH=$PATH:/data/install/program_files/Prodigal/
-PATH=$PATH:/data/install/program_files/mummer-4.0.0rc1/bin/
-PATH=$PATH:/data/install/program_files/Krona/KronaTools/bin/
-PATH=$PATH:/data/install/program_files/tRNAscan-SE-2.0/bin
-PATH=$PATH:/data/install/program_files/
-PATH=$PATH:/data/install/program_files/bbmap/
-PATH=$PATH:/home/ec2-user/edirect/
+PATH=$PATH:$root_dir/install/program_files/Prodigal/
+PATH=$PATH:$root_dir/install/program_files/mummer-4.0.0rc1/bin/
+PATH=$PATH:$root_dir/install/program_files/Krona/KronaTools/bin/
+PATH=$PATH:$root_dir/install/program_files/tRNAscan-SE-2.0/bin
+PATH=$PATH:$root_dir/install/program_files/
+PATH=$PATH:$root_dir/install/program_files/bbmap/
+PATH=$PATH:/home/ec2-user/edirect/   # Change this to whatever user you want to use, ec2-user is the default on amazonlinux images
 
 CONTIGS="$contig_dir"/final.contigs.fa
 
 before=$(date +"%T")
 echo "Start cenote: $before"
-python /data/install/Cenote-Taker2/run_cenote-taker2.py -c $CONTIGS -r $SRA  -p True -m $MEM -t $THREADS >> /data/run/logs/out_"$SRA".log 2> /data/run/logs/err_"$SRA".log
+python $root_dir/install/Cenote-Taker2/run_cenote-taker2.py -c $CONTIGS -r $SRA  -p True -m $MEM -t $THREADS >> $root_dir/run/logs/out_"$SRA".log 2> $root_dir/run/logs/err_"$SRA".log
 after=$(date +"%T")
 echo "End cenote: $after"
 

@@ -31,6 +31,11 @@ Create an EC2 instance and an EFS volume then [mount the EFS volume](https://doc
 
 ```
 git clone git@github.com:Ulthran/virus-hunting-pipeline.git
+```
+
+Make sure that the `$root_dir` variable defined in `virus-hunting-pipeline/install/setup_pipeline.sh` and `virus-hunting-pipeline/run/pipeline.sh` point to the directory you just cloned into and also check the paths hard-coded into `virus-hunting-pipeline/run/default_config.yml`. Then run the install script:
+
+```
 cd virus-hunting-pipeline/install
 source ./setup_pipeline.sh
 ```
