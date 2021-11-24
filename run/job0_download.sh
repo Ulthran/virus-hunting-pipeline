@@ -5,12 +5,13 @@
 SRA=$1
 THREADS=$2
 MEM=$3
-root_dir="/efs/virus_hunting_pipeline"
+root_dir="/efs/virus-hunting-pipeline"
 WD="$root_dir/virus_scanning"
 DIR="$WD"/raw/"$SRA"
 
 ### SET UP ENVIRONMENT ###
 
+yum install -y which gzip
 export PATH=$PATH:$root_dir/install/sratoolkit.2.11.3-ubuntu64/bin
 which fastq-dump # this step should output the path just added to PATH, if it errors the installation should be fixed
 
