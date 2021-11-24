@@ -54,4 +54,6 @@ source ./setup_pipeline.sh
 
 ## Through Batch
 
-
+```
+cd /efs/virus-hunting-pipeline/run && source ./job0_download.sh
+```

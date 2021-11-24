@@ -43,7 +43,7 @@ if [ -s PHANOTATE/phanotate.py ] ; then
 else
 	git clone --recursive https://github.com/deprekate/PHANOTATE.git
 	cd PHANOTATE; # git checkout version from feb 8 2020
-	make
+	make # should this be `python3 setup.py install` instead?
 	cd ..
 fi
 
