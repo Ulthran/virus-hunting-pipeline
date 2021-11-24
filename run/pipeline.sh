@@ -14,7 +14,7 @@
 SRA=$1
 THREADS=$2
 MEM=$3
-root_dir="/efs/virus_hunting_pipeline"
+root_dir="/efs/virus-hunting-pipeline"
 WD="$root_dir/virus_scanning"
 
 echo Begin sample $SRA

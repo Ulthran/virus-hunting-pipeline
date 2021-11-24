@@ -1,10 +1,10 @@
 #!/bin/bash
 
-root_dir="/efs/virus_hunting_pipeline"
+root_dir="/mnt/efs/virus-hunting-pipeline"
 
 ## STEP 1: set up conda python manager 
 ## this step will require some interaction - you need to accept the miniconda 
-## agreement and confirm installation location (should be in your home directory)
+## agreement and confirm installation location (should be in $root_dir/install)
 ./Miniconda3-py38_4.10.3-Linux-x86_64.sh
 
 # Install sratools for downloading SRA sequences from S3 public DBs
