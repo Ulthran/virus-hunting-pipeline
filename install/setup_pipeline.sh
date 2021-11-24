@@ -14,7 +14,7 @@ which fastq-dump # this step should output the path just added to PATH, if it er
 
 vdb-config -i # this step requires interaction - follow instructions here
               # https://github.com/ncbi/sra-tools/wiki/03.-Quick-Toolkit-Configuration
-	          # and set the "Location of user-repository" to $root_dir/virus_scanning/raw/dump
+	          # and set the "Location of user-repository" by creating the directory (Create Dir option): $root_dir/virus_scanning/raw/dump
 
 ## STEP 2: Install sunbeam conda environment
 conda env create -f pipeline_installation_files/sunbeam_conda.yml
