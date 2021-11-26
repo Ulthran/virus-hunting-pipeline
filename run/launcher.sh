@@ -1,3 +1,3 @@
 #!/bin/bash
 
-source /efs/virus-hunting-pipeline/run/job0_download.sh SRR10969359 0 0
+source /efs/virus-hunting-pipeline/run/job1_sunbeam.sh SRR10969359 34 56

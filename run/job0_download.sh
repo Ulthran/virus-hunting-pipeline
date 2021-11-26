@@ -11,7 +11,7 @@ DIR="$WD"/raw/"$SRA"
 
 ### SET UP ENVIRONMENT ###
 
-yum install -y which gzip
+yum install -y which gzip wget
 export PATH=$PATH:$root_dir/install/sratoolkit.2.11.3-ubuntu64/bin
 which fastq-dump # this step should output the path just added to PATH, if it errors the installation should be fixed
 
@@ -21,34 +21,34 @@ mkdir $DIR
 
 ### Using NCBI FTP server ###
 ## prefix used by the EBI ftp server
-#SRA_prefix=${SRA:0:6}
+SRA_prefix=${SRA:0:6}
 #
 ## the suffix needs zero padding and some filenames don't have suffix folder at all
-#len_sra=${#SRA}
-#if [ $len_sra -eq 11 ]; then
-#    suffix=0${SRA:9:11}
-#    wget_path=ftp://ftp.sra.ebi.ac.uk/vol1/fastq/$SRA_prefix/$suffix/$SRA/* ## path for 11 character accessions
+len_sra=${#SRA}
+if [ $len_sra -eq 11 ]; then
+    suffix=0${SRA:9:11}
+    wget_path=ftp://ftp.sra.ebi.ac.uk/vol1/fastq/$SRA_prefix/$suffix/$SRA/* ## path for 11 character accessions
 #
-#elif [ $len_sra -eq 10 ]; then
-#    let "tmp = $len_sra - 1"
-#    suffix=00${SRA:$tmp:$len_sra}
-#    wget_path=ftp://ftp.sra.ebi.ac.uk/vol1/fastq/$SRA_prefix/$suffix/$SRA/* ## path for 10 character accessions
+elif [ $len_sra -eq 10 ]; then
+    let "tmp = $len_sra - 1"
+    suffix=00${SRA:$tmp:$len_sra}
+    wget_path=ftp://ftp.sra.ebi.ac.uk/vol1/fastq/$SRA_prefix/$suffix/$SRA/* ## path for 10 character accessions
 #
-#else
-#    wget_path=ftp://ftp.sra.ebi.ac.uk/vol1/fastq/$SRA_prefix/$SRA/* ## path has no suffix
-#fi
+else
+    wget_path=ftp://ftp.sra.ebi.ac.uk/vol1/fastq/$SRA_prefix/$SRA/* ## path has no suffix
+fi
 #
-#wget $wget_path -P $DIR
+wget $wget_path -P $DIR
 
 ### Using NCBI public S3 bucket ###
 export PATH=$PATH:$root_dir/install/sratoolkit.2.11.3-ubuntu64/bin
 source ~/.bashrc
 
-prefetch $SRA
-cd "$WD"/raw/dump/sra/
-fasterq-dump $SRA --outdir $DIR
-cd $DIR
-gzip -1 "$SRA"_1.fastq && gzip -1 "$SRA"_2.fastq
-cd $root_dir/run
+#prefetch $SRA
+#cd "$WD"/raw/dump/sra/
+#fasterq-dump $SRA --outdir $DIR
+#cd $DIR
+#gzip -1 "$SRA"_1.fastq && gzip -1 "$SRA"_2.fastq
+#cd $root_dir/run
 
 echo Fastq downloaded

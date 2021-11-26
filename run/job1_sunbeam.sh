@@ -11,7 +11,8 @@ DIR="$WD"/raw/"$SRA"
 
 ### SET UP ENVIRONMENT ###
 
-#export stuff to PATH
+export PATH=$PATH:$root_dir/install/miniconda3/condabin
+export PATH=$PATH:$root_dir/install/miniconda3/bin
 
 cd $root_dir/run
 ## ------------------- Create sample list file for sunbeam ------------------
@@ -31,7 +32,7 @@ sed -i "s/OUTPUT_DIRECTORY/$sunbeam_dir/g" $config_file ## add the output direct
 echo Config file created
 
 ## ---------------- Run sunbeam for quality control ---------------------------
-source $root_dir/install/miniconda3/etc/profile.d/conda.sh 
+#source $root_dir/install/miniconda3/etc/profile.d/conda.sh 
 conda activate sunbeam
 
 sunbeam run --cores $THREADS --configfile $config_file all_qc
