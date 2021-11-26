@@ -31,7 +31,7 @@ You will need to clone a GitHub repository which now requires at least an SSH co
 
 ## On an EFS volume (best for many parallel runs)
 
-Create an EC2 instance and an EFS volume then [mount the EFS volume](https://docs.aws.amazon.com/efs/latest/ug/wt1-test.html) to a location of your choosing. Once it is mounted, `cd` into the volume root and clone this repo:
+Create an EC2 instance and an EFS volume then [mount the EFS volume](https://docs.aws.amazon.com/efs/latest/ug/wt1-test.html) to a location of your choosing (make sure that this is the same location you use in Batch jobs though, otherwise conda will run into problems, e.g. `/efs/`). Once it is mounted, `cd` into the volume root and clone this repo:
 
 ```
 git clone git@github.com:Ulthran/virus-hunting-pipeline.git
