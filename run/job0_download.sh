@@ -5,15 +5,13 @@
 SRA=$1
 THREADS=$2
 MEM=$3
-root_dir="/efs/virus-hunting-pipeline"
+root_dir="/virus-hunting-pipeline"
 WD="$root_dir/virus_scanning"
 DIR="$WD"/raw/"$SRA"
 
 ### SET UP ENVIRONMENT ###
 
-yum install -y which gzip wget
-export PATH=$PATH:$root_dir/install/sratoolkit.2.11.3-ubuntu64/bin
-which fastq-dump # this step should output the path just added to PATH, if it errors the installation should be fixed
+#yum install -y which gzip wget
 
 echo Begin sample $SRA
 ##  ------------------ Download fastq using wget  -------------------------
@@ -41,8 +39,8 @@ fi
 wget $wget_path -P $DIR
 
 ### Using NCBI public S3 bucket ###
-export PATH=$PATH:$root_dir/install/sratoolkit.2.11.3-ubuntu64/bin
-source ~/.bashrc
+#export PATH=$PATH:$root_dir/install/sratoolkit.2.11.3-ubuntu64/bin
+#source ~/.bashrc
 
 #prefetch $SRA
 #cd "$WD"/raw/dump/sra/
