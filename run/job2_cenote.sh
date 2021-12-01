@@ -5,8 +5,7 @@
 SRA=$1
 THREADS=$2
 MEM=$3
-root_dir="/virus-hunting-pipeline"
-root_efs="/efs/virus-hunting-pipeline"
+root_dir="/efs/virus-hunting-pipeline"
 WD="$root_dir/virus_scanning"
 DIR="$WD"/raw/"$SRA"
 contig_dir="$DIR"/contigs
@@ -46,7 +45,7 @@ CONTIGS="$contig_dir"/final.contigs.fa
 
 before=$(date +"%T")
 echo "Start cenote: $before"
-python $root_efs/install/Cenote-Taker2/run_cenote-taker2.py -c $CONTIGS -r $SRA  -p True -m $MEM -t $THREADS >> $root_efs/run/logs/out_"$SRA".log 2> $root_efs/run/logs/err_"$SRA".log
+python $root_dir/install/Cenote-Taker2/run_cenote-taker2.py -c $CONTIGS -r $SRA  -p True -m $MEM -t $THREADS >> $root_dir/run/logs/out_"$SRA".log 2> $root_dir/run/logs/err_"$SRA".log
 after=$(date +"%T")
 echo "End cenote: $after"
 
@@ -56,8 +55,8 @@ cd $WD
 
 echo Cenote Taker Finished
 ## ------ Move the summary table from Cenote-Taker2 to permanent dir ---------
-cp "$cenote_output"/$SRA/*CONTIG_SUMMARY.tsv $root_efs/virus_scanning/final_summaries/
-cp "$cenote_output"/$SRA/final_combined_virus_sequences_*.fna $root_efs/virus_scanning/final_contigs/
+cp "$cenote_output"/$SRA/*CONTIG_SUMMARY.tsv $root_dir/virus_scanning/final_summaries/
+cp "$cenote_output"/$SRA/final_combined_virus_sequences_*.fna $root_dir/virus_scanning/final_contigs/
 
 ## ------ Clean up everything, remove all files other than the contigs and summary -----------
 #rm -r $DIR
