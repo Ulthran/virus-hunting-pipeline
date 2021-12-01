@@ -12,12 +12,15 @@ contig_dir="$DIR"/contigs
 
 ### SET UP ENVIRONMENT ###
 
-#install edirect
+export PATH=$PATH:$root_dir/install/miniconda3/condabin
+conda init bash
+source /root/.bashrc
 
 cd $root_dir/run
 ## ------------- Cenote-Taker2 for detecting viral contigs -------------------
 source $root_dir/install/miniconda3/etc/profile.d/conda.sh
-conda activate $root_dir/install/Cenote-Taker2/cenote_taker/cenote-taker2_env/
+#conda activate /virus-hunting-pipeline/install/miniconda3/envs/cenote-taker2_env/
+conda activate $root_dir/install/miniconda3/envs/cenote-taker2_env/
 
 if [ -d "cenote_output" ] ; then
 	echo "cenote_output already exists"
@@ -30,13 +33,13 @@ cd $SRA
 cenote_output=`pwd`
 
 ## some required programs are loaded in the conda environemnt, others need to be added to the path
-PATH=$PATH:$root_dir/install/program_files/Prodigal/
-PATH=$PATH:$root_dir/install/program_files/mummer-4.0.0rc1/bin/
-PATH=$PATH:$root_dir/install/program_files/Krona/KronaTools/bin/
-PATH=$PATH:$root_dir/install/program_files/tRNAscan-SE-2.0/bin
-PATH=$PATH:$root_dir/install/program_files/
-PATH=$PATH:$root_dir/install/program_files/bbmap/
-PATH=$PATH:/home/ec2-user/edirect/   # Change this to whatever user you want to use, ec2-user is the default on amazonlinux images
+PATH=$PATH:/virus-hunting-pipeline/install/program_files/Prodigal/
+PATH=$PATH:/virus-hunting-pipeline/install/program_files/mummer-4.0.0rc1/bin/
+PATH=$PATH:/virus-hunting-pipeline/install/program_files/Krona/KronaTools/bin/
+PATH=$PATH:/virus-hunting-pipeline/install/program_files/tRNAscan-SE-2.0/bin
+PATH=$PATH:/virus-hunting-pipeline/install/program_files/
+PATH=$PATH:/virus-hunting-pipeline/install/program_files/bbmap/
+PATH=$PATH:/root/edirect/   # Change this to whatever user you want to use, ec2-user is the default on amazonlinux images
 
 CONTIGS="$contig_dir"/final.contigs.fa
 
@@ -56,7 +59,7 @@ cp "$cenote_output"/$SRA/*CONTIG_SUMMARY.tsv final_summaries/
 cp "$cenote_output"/$SRA/final_combined_virus_sequences_*.fna final_contigs/
 
 ## ------ Clean up everything, remove all files other than the contigs and summary -----------
-rm -r $DIR
-rm -r $cenote_output 
-rm -r fasterq.tmp.microb120*
-rm "$WD"/raw/dump/sra/*.sra
+#rm -r $DIR
+#rm -r $cenote_output 
+#rm -r fasterq.tmp.microb120*
+#rm "$WD"/raw/dump/sra/*.sra

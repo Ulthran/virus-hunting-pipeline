@@ -18,7 +18,7 @@
 
 # General options
 all:
-  root: /efs/virus_hunting_pipeline/virus_scanning/
+  root: /efs/virus-hunting-pipeline/virus_scanning/
   output_fp: OUTPUT_DIRECTORY/sunbeam
   samplelist_fp: OUTPUT_DIRECTORY/sample_list.csv
   paired_end: true
@@ -37,8 +37,8 @@ qc:
   trailing: 3
   slidingwindow: [4, 15]
   minlen: 36
-  adapter_template: /efs/virus_hunting_pipeline/install/NexteraPE-PE.fa ## I need to figure this out 
-  adapter_fp: /efs/virus_hunting_pipeline/install/NexteraPE-PE.fa
+  adapter_template: /efs/virus-hunting-pipeline/install/NexteraPE-PE.fa ## I need to figure this out 
+  adapter_fp: /efs/virus-hunting-pipeline/install/NexteraPE-PE.fa
   # Cutadapt
   fwd_adapters: ""
   rev_adapters: ""

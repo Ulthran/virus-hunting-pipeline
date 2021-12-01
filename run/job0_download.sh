@@ -12,8 +12,6 @@ DIR="$WD"/raw/"$SRA"
 ### SET UP ENVIRONMENT ###
 
 yum install -y which gzip wget
-export PATH=$PATH:$root_dir/install/sratoolkit.2.11.3-ubuntu64/bin
-which fastq-dump # this step should output the path just added to PATH, if it errors the installation should be fixed
 
 echo Begin sample $SRA
 ##  ------------------ Download fastq using wget  -------------------------
